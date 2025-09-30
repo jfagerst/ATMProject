@@ -1,0 +1,24 @@
+const db=require ('../database');
+
+const pankkiautomaatti={
+    getAll:function(callback){
+        return db.query('SELECT * FROM pankkiautomaatti', callback);
+    },
+    getById:function(id, callback){
+        return db.query('SELECT * FROM pankkiautomaatti WHERE idpankkiautomaatti=?', [id],callback);
+    },
+    add:function(automaatinvarat, idkortti, callback) {
+        const query = 'INSERT INTO pankkiautomaatti (automaatinvarat, idkortti) VALUES (?, ?)';
+        return db.query(query, [automaatinvarat, idkortti], callback);
+    },
+    update:function(id,automaatinvarat, idkortti, callback) {
+        const query = 'UPDATE pankkiautomaatti SET automaatinvarat = ?, idkortti = ? WHERE idpankkiautomaatti = ?';
+        return db.query(query,[automaatinvarat, idkortti, id], callback);
+    },
+    delete: function (id,callback) {
+        const query = 'DELETE FROM pankkiautomaatti WHERE idpankkiautomaatti = ?';
+        return db.query(query,[id], callback);
+    }
+};
+
+module.exports=pankkiautomaatti;

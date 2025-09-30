@@ -1,0 +1,16 @@
+release/accountinfo.o
+release/environment.o
+release/loginwindow.o
+release/loginwindow2.o
+release/main.o
+release/mainwindow.o
+release/nosto.o
+release/saldo.o
+release/tapahtumat.o
+release/moc_accountinfo.o
+release/moc_loginwindow.o
+release/moc_loginwindow2.o
+release/moc_mainwindow.o
+release/moc_nosto.o
+release/moc_saldo.o
+release/moc_tapahtumat.o

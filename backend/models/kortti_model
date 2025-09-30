@@ -1,0 +1,55 @@
+const db=require ('../database');
+const bcrypt=require('bcryptjs');
+
+const kortti={
+    getAll:function(callback){
+        return db.query('SELECT * FROM kortti', callback);
+    },
+    getById:function(id, callback){
+        return db.query('SELECT * FROM kortti WHERE idkortti=?', [id],callback);
+    },
+
+    add: function(pin, voimassaolo, callback) {
+        bcrypt.hash(pin, 10, function(err, hashedpin) {
+            if (err) {
+                return callback(err, null);
+            }
+            const query = 'INSERT INTO kortti (pin, voimassaolo) VALUES (?, ?)';
+            return db.query(query, [hashedpin, voimassaolo], callback);
+        });
+    },
+
+
+    update: function(id, pin, voimassaolo, callback) {
+        bcrypt.hash(pin, 10, function(err, hashedpin) {
+            if (err) {
+                return callback(err, null);
+            }
+            const query = 'UPDATE kortti SET pin = ?, voimassaolo = ? WHERE idkortti = ?';
+            return db.query(query, [hashedpin, voimassaolo, id], callback);
+        });
+    },
+    delete: function (id,callback) {
+        const query = 'DELETE FROM kortti WHERE idkortti = ?';
+        return db.query(query,[id], callback);
+    },
+    checkPassword:function(idkortti, callback){
+        return db.query('SELECT pin FROM kortti WHERE idkortti=?',[idkortti],callback);
+    },
+    
+    lockCard: function(idkortti, callback) {
+        const query = 'UPDATE kortti SET lukitus = 0 WHERE idkortti = ?';
+        return db.query(query, [idkortti], callback);
+    },
+
+    unlockCard: function(idkortti, callback) {
+        const query = 'UPDATE kortti SET lukitus = 1 WHERE idkortti = ?';
+        return db.query(query, [idkortti], callback);
+    },
+
+    checkLockStatus: function(idkortti, callback) {
+        return db.query('SELECT lukitus FROM kortti WHERE idkortti = ?', [idkortti], callback);
+    },
+};
+
+module.exports=kortti; 

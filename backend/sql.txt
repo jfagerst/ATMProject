@@ -1,0 +1,2 @@
+CREATE USER pankkiuser@'localhost' IDENTIFIED BY 'pankkipass';
+GRANT ALL ON pankki.* TO pankkiuser@'localhost';

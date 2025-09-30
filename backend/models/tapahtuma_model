@@ -1,0 +1,60 @@
+const db=require('../database');
+
+const tapahtuma= {
+    getAll:function(callback){
+        return db.query('CALL GetAllTapahtumat()', callback);
+    },
+    getById:function(id, callback){
+        return db.query('CALL GetTapahtumaById(?)', [id], callback);
+    },
+    add:function(tapahtumaData, callback){
+        return db.query('CALL AddTapahtuma(?, ?, ?, ?, ?)', [
+            tapahtumaData.paivamaara,
+            tapahtumaData.nostonmaara,
+            tapahtumaData.idpankkiautomaatti,
+            tapahtumaData.idtili,
+            tapahtumaData.tapahtumanTyyppi
+        ], callback);
+    },
+
+    update:function(id,tapahtumaData,callback){
+        return db.query('CALL UpdateTapahtuma(?, ?, ?, ?, ?, ?)', [
+            id,
+            tapahtumaData.paivamaara,
+            tapahtumaData.nostonmaara,
+            tapahtumaData.idpankkiautomaatti,
+            tapahtumaData.idtili,
+            tapahtumaData.tapahtumanTyyppi,
+        ], callback);
+    },
+
+    delete:function(id,callback){
+        return db.query('CALL DeleteTapahtuma(?)', [id],callback);
+    },
+
+    getTapahtumatByKorttiId: function(id, limit, offset, callback) {
+        return db.query(`
+            SELECT tapahtuma.idtapahtuma, tapahtuma.paivamaara, tapahtuma.nostonmaara, tapahtuma.tapahtumanTyyppi
+            FROM tapahtuma
+            JOIN tili ON tapahtuma.idtili = tili.idtili
+            JOIN korttitili ON tili.idtili = korttitili.idtili 
+            JOIN kortti ON korttitili.idkortti = kortti.idkortti
+            WHERE kortti.idkortti = ?
+            ORDER BY tapahtuma.idtapahtuma DESC
+            LIMIT ? OFFSET ?;
+        `, [id, limit, offset], callback);
+    },
+    
+    getTapahtumatCount: function(id, callback) {
+        return db.query(`
+            SELECT COUNT(*) AS count 
+            FROM tapahtuma
+            JOIN tili ON tapahtuma.idtili = tili.idtili
+            JOIN korttitili ON tili.idtili = korttitili.idtili
+            JOIN kortti ON korttitili.idkortti = kortti.idkortti
+            WHERE kortti.idkortti = ?
+        `, [id], callback);
+    }
+};
+
+module.exports=tapahtuma;
