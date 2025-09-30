@@ -5,6 +5,14 @@ Tämä projekti on osa ohjelmistokehityksen kurssia, ja sen tavoitteena on kehit
 
 Projektin keskeiset vaatimukset sisältävät tietokannan toteutuksen, REST API -rajapinnan sekä Qt-työpöytäsovelluksen.
 
+Projekti toteutettiin ryhmätyönä. Tässä projektissa olen tehnyt seuraavat osat
+
+- Tietokannan sunnittelu ja luonti
+- Backendiin CRUDit asiakas- ja tilitauluille
+- Backendiin login
+- Sovelluksen toiminnallisuuksia, kuten debit-tilin saldon tarkistus, debitnosto, luoton tarkistus ja luoton nosto, tilitapahtumien kirjaus
+
+
 ## 🔧 Käytetyt teknologiat
 Projektissa käytetään seuraavia teknologioita:
 - **Tietokanta**: MySQL / MariaDB
@@ -47,9 +55,6 @@ Projektin toteutus koostuu seuraavista osista:
 Alla on projektin ER-kaavio:
 
 <img src="ER-kaavio_ryhma9.png" alt="ER-kaavio">
-
-## 📄 Projektiposteri
-![image](https://github.com/user-attachments/assets/a588e200-fdbd-4d2c-a515-1c4d67f41814)
 
 
 ## 📄 Lisenssi
