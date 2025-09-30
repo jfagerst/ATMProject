@@ -11,6 +11,7 @@ Projekti toteutettiin ryhmätyönä. Tässä projektissa olen tehnyt seuraavat o
 - Backendiin CRUDit asiakas- ja tilitauluille
 - Backendiin login
 - Sovelluksen toiminnallisuuksia, kuten debit-tilin saldon tarkistus, debitnosto, luoton tarkistus ja luoton nosto, tilitapahtumien kirjaus
+- Osallistuin Qt Creator -käyttöliittymän luontiin
 
 
 ## 🔧 Käytetyt teknologiat
